@@ -48,7 +48,7 @@
 
                 <div class="row">
                     <div class="col-md-4">
-                        <a href="{{route('indexCustomer')}}" class="btn btn-secondary btn-lg" id="btnX">
+                        <a href="{{route('customer.index')}}" class="btn btn-secondary btn-lg" id="btnX">
                             <i class="fa fa-users"></i>
                             <br>
                             Master Customers

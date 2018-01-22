@@ -30,7 +30,7 @@
         <div class="page-header">
             <h1><i class="fa fa-users"></i> Master Customers</h1>
         </div>
-        <a href="{{route('createCustomer')}}" class="btn btn-info"><span class="fa fa-plus-circle"></span> Tambah Customer</a>
+        <a href="{{route('customer.create')}}" class="btn btn-info"><span class="fa fa-plus-circle"></span> Tambah Customer</a>
         </center>
         <div class="content-wrap">  <!--START: Content Wrap-->
 
@@ -49,6 +49,7 @@
                             <table class="table table-bordered table-dataTable">
                                 <thead>
                                 <tr>
+                                    <th>Kode</th>
                                     <th>Nama</th>
                                     <th>Alamat</th>
                                     <th>Telepon</th>
@@ -57,19 +58,31 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Tiger Nixon</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="button group">
-                                            <button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                            <button type="button" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                                  @foreach ($data as $row)
+                                    <tr>
+                                        <td>{{$row->customer_code}}</td>
+                                        <td>{{$row->name}}</td>
+                                        <td>{{$row->address}}</td>
+                                        <td>{{$row->phone}}</td>
+                                        <td>
+                                          @if ($row->status == 0)
+                                            Tidak Aktif
+                                          @else
+                                            Aktif
+                                          @endif
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="button group">
+                                                <a href="{{route('customer.edit',['customer' => $row->id])}}"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button></a>
+                                                <form action="{{route('customer.destroy',['customer' => $row->id])}}" method="post">
+                                                  {{ csrf_field() }}
+                                                  <input type="hidden" name="_method" value="DELETE">
+                                                  <button type="submit" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                  @endforeach
                                 </tbody>
                             </table>
                         </div>

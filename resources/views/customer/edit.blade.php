@@ -47,36 +47,36 @@
                         </div>
 
                         <div class="panel-body">
-                            <form action="#" role="form" id="formvalidationtooltip">
+                            <form action="{{route('customer.update',['customer' => $data->id])}}" method="post" role="form" id="formvalidationtooltip">
+                              {{ csrf_field() }}
+                              <input type="hidden" name="_method" value="PUT">
                                 <div class="form-body">
-
                                     <div class="form-group">
                                         <label>Kode Customer</label>
                                         <input type="text"
                                                class="form-control"
-                                               name="customer_code" placeholder="Customer Code"
-                                               readonly/>
+                                               name="customer_code" value="{{$data->customer_code}}" required/>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Nama Lengkap</label>
                                         <input type="text"
                                                class="form-control"
-                                               name="name" placeholder="Nama Lengkap"
+                                               name="name" value="{{$data->name}}"
                                                required/>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Alamat</label>
                                         <textarea name="address" required id="address" cols="30" rows="6"
-                                                  placeholder="Alamat Lengkap" class="form-control"></textarea>
+                                                  placeholder="Alamat Lengkap" class="form-control">{{$data->address}}</textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Nomor Telepon</label>
                                         <input type="number"
                                                class="form-control"
-                                               name="phone" placeholder="Nomor Telepon"
+                                               name="phone" value="{{$data->phone}}"
                                                required/>
                                     </div>
 
@@ -84,8 +84,13 @@
                                         <label>Status</label>
                                         <select name="status_id" class="form-control" required>
                                             <option value="">--Pilih Satu--</option>
-                                            <option value="option1">Aktif</option>
-                                            <option value="option2">Non-Aktif</option>
+                                            @if ($data->status == 0 )
+                                              <option value="option1">Aktif</option>
+                                              <option value="option2" selected>Non-Aktif</option>
+                                            @else
+                                              <option value="option1" selected>Aktif</option>
+                                              <option value="option2">Non-Aktif</option>
+                                            @endif
                                         </select>
                                     </div>
 
@@ -93,7 +98,7 @@
 
                                 <div class="form-actions fluid">
                                     <div class="col-md-12 text-right">
-                                        <button type="submit" class="btn btn-info">Submit</button>
+                                        <button type="submit" class="btn btn-warning">Save</button>
                                     </div>
                                 </div>
                             </form>

@@ -8,7 +8,7 @@
                 <a href="{{route('home')}}"><i class="sli-home"></i> <span class="nav-text">Home</span></a>
             </li>
             <li>
-                <a href="{{route('indexCustomer')}}"><i class="sli-users"></i> <span class="nav-text">Master Customers</span></a>
+                <a href="{{route('customer.index')}}"><i class="sli-users"></i> <span class="nav-text">Master Customers</span></a>
             </li>
             <li>
                 <a href="{{route('indexReminder')}}"><i class="sli-bell"></i> <span class="nav-text">Hutang & Piutang</span></a>
