@@ -47,39 +47,50 @@
                         </div>
 
                         <div class="panel-body">
-                            <form action="#" role="form" id="formvalidationtooltip">
+                            <form action="{{route('account_group.update',['account_group' => $data->id])}}" method="POST" role="form" id="formvalidationtooltip">
+                              {{ csrf_field() }}
+                              <input type="hidden" name="_method" value="PUT">
                                 <div class="form-body">
-
                                     <div class="form-group">
                                         <label>Nama Rekening Group</label>
                                         <input type="text"
                                                class="form-control"
-                                               name="name" placeholder="Nama Rekening Group"
+                                               name="name" value="{{$data->name}}"
                                                required/>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Normal</label>
-                                        <select name="normal_id" class="form-control" required>
+                                        <select name="normal" class="form-control" required>
                                             <option value="">--Pilih Satu--</option>
-                                            <option value="1">Debet</option>
-                                            <option value="2">Kredit</option>
+                                            @if ($data->normal == 'Debet')
+                                              <option value="Debet" selected>Debet</option>
+                                              <option value="Kredit">Kredit</option>
+                                            @else
+                                              <option value="Debet">Debet</option>
+                                              <option value="Kredit" selected>Kredit</option>
+                                            @endif
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Laporan</label>
-                                        <select name="report_id" class="form-control" required>
+                                        <select name="report" class="form-control" required>
                                             <option value="">--Pilih Satu--</option>
-                                            <option value="1">Neraca</option>
-                                            <option value="2">Laba Rugi</option>
+                                            @if ($data->report == 'Neraca')
+                                              <option value="Neraca" selected>Neraca</option>
+                                              <option value="Laba Rugi">Laba Rugi</option>
+                                            @else
+                                              <option value="Neraca">Neraca</option>
+                                              <option value="Laba Rugi" selected>Laba Rugi</option>
+                                            @endif
                                         </select>
                                     </div>
                                 </div>
 
                                 <div class="form-actions fluid">
                                     <div class="col-md-12 text-right">
-                                        <button type="submit" class="btn btn-info">Submit</button>
+                                        <button type="submit" class="btn btn-warning">Save</button>
                                     </div>
                                 </div>
                             </form>

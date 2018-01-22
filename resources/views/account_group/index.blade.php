@@ -30,7 +30,7 @@
         <div class="page-header">
             <h1><i class="fa fa-list"></i> Rekening Group</h1>
         </div>
-        <a href="{{route('createAccountGroup')}}" class="btn btn-info"><span class="fa fa-plus-circle"></span> Tambah Rekening Group</a>
+        <a href="{{route('account_group.create')}}" class="btn btn-info"><span class="fa fa-plus-circle"></span> Tambah Rekening Group</a>
         </center>
         <div class="content-wrap">  <!--START: Content Wrap-->
 
@@ -57,19 +57,24 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>{{$no=1}}</td>
-                                    <td>System Architect</td>
-                                    <td>Edinburgh</td>
-                                    <td>61</td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="button group">
-                                            <button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                            <button type="button" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                                @foreach ($data as $key => $row)
+                                  <tr>
+                                      <td>{{++$key}}</td>
+                                      <td>{{$row->name}}</td>
+                                      <td>{{$row->normal}}</td>
+                                      <td>{{$row->report}}</td>
+                                      <td>
+                                          <div class="btn-group" role="group" aria-label="button group">
+                                              <a href="{{route('account_group.edit',['account_group' => $row->id])}}"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button></a>
+                                              <form action="{{route('account_group.destroy',['account_group' => $row->id])}}" method="post">
+                                                {{ csrf_field() }}
+                                                <input type="hidden" name="_method" value="DELETE">
+                                                <button type="submit" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
+                                              </form>
+                                          </div>
+                                      </td>
+                                  </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>

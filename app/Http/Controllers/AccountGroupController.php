@@ -14,7 +14,9 @@ class AccountGroupController extends Controller
      */
     public function index()
     {
-        return view('account_group.index');
+        return view('account_group.index',[
+          'data' => AccountGroup::all()
+        ]);
     }
 
     /**
@@ -35,7 +37,8 @@ class AccountGroupController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        AccountGroup::create($request->all());
+        return redirect(route('account_group.index'));
     }
 
     /**
@@ -57,7 +60,9 @@ class AccountGroupController extends Controller
      */
     public function edit(AccountGroup $accountGroup)
     {
-        //
+        return view('account_group.edit',[
+          'data' => $accountGroup
+        ]);
     }
 
     /**
@@ -69,7 +74,8 @@ class AccountGroupController extends Controller
      */
     public function update(Request $request, AccountGroup $accountGroup)
     {
-        //
+        $accountGroup->update($request->all());
+        return redirect(route('account_group.index'));
     }
 
     /**
@@ -80,6 +86,7 @@ class AccountGroupController extends Controller
      */
     public function destroy(AccountGroup $accountGroup)
     {
-        //
+        $accountGroup->delete();
+        return redirect(route('account_group.index'));
     }
 }

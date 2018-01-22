@@ -47,9 +47,9 @@
                         </div>
 
                         <div class="panel-body">
-                            <form action="#" role="form" id="formvalidationtooltip">
+                            <form action="{{route('account_group.store')}}" method="post" role="form" id="formvalidationtooltip">
+                              {{ csrf_field() }}
                                 <div class="form-body">
-
                                     <div class="form-group">
                                         <label>Nama Rekening Group</label>
                                         <input type="text"
@@ -60,19 +60,19 @@
 
                                     <div class="form-group">
                                         <label>Normal</label>
-                                        <select name="normal_id" class="form-control" required>
-                                            <option value="">--Pilih Satu--</option>
-                                            <option value="1">Debet</option>
-                                            <option value="2">Kredit</option>
+                                        <select name="normal" class="form-control" required>
+                                            <option value="" disabled>--Pilih Satu--</option>
+                                            <option value="Debet">Debet</option>
+                                            <option value="Kredit">Kredit</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Laporan</label>
-                                        <select name="report_id" class="form-control" required>
-                                            <option value="">--Pilih Satu--</option>
-                                            <option value="1">Neraca</option>
-                                            <option value="2">Laba Rugi</option>
+                                        <select name="report" class="form-control" required>
+                                            <option value="" disabled>--Pilih Satu--</option>
+                                            <option value="Neraca">Neraca</option>
+                                            <option value="Laba Rugi">Laba Rugi</option>
                                         </select>
                                     </div>
                                 </div>
