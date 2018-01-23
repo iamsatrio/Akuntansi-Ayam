@@ -16,7 +16,9 @@ class AccountController extends Controller
     public function index()
     {
         return view('account.index',[
-          'data' => Account::all()
+          'header1' => Account::where('headerId', 1)->get(),
+          'header2' => Account::where('headerId', 2)->get(),
+          'header3' => Account::where('headerId', 3)->get(),
         ]);
     }
 

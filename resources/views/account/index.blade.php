@@ -49,8 +49,7 @@
                             <table class="table table-bordered table-dataTable">
                                 <thead>
                                 <tr>
-                                    <th>No.</th>
-                                    <th>Rekening Akuntansi</th>
+                                    <th colspan="2">Rekening Akuntansi</th>
                                     <th>Type</th>
                                     <th>Normal</th>
                                     <th>Debet</th>
@@ -59,10 +58,86 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                  @foreach ($data as $key => $row)
+                                  <tr>
+                                    <td colspan="2">1-100 Aktiva Lancar</td>
+                                    <td>Header</td>
+                                    <td>Normal</td>
+                                    <td>Debit</td>
+                                    <td>Kredit</td>
+                                    <td></td>
+                                  </tr>
+                                  @foreach ($header1 as $key => $row)
                                     <tr>
-                                        <td>{{++$key}}</td>
-                                        <td>{{$row->name}}</td>
+                                        <td></td>
+                                        <td>{{$row->account_code}} - {{$row->name}}</td>
+                                        <td>
+                                          @if ($row->typeId == 1)
+                                            Detail
+                                          @else
+                                            Header
+                                          @endif
+                                        </td>
+                                        <td>{{$row->normal}}</td>
+                                        <td>Rp. {{number_format($row->debit)}}</td>
+                                        <td>Rp. {{number_format($row->credit)}}</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="button group">
+                                                <a href="{{route('account.edit',['account' => $row->id])}}"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button></a>
+                                                <form action="{{route('account.destroy',['account' => $row->id])}}" method="post">
+                                                  {{ csrf_field() }}
+                                                  <input type="hidden" name="_method" value="DELETE">
+                                                  <button type="submit" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                  @endforeach
+                                  <tr>
+                                    <td colspan="2">1-200 Aktiva Tetap</td>
+                                    <td>Header</td>
+                                    <td>Normal</td>
+                                    <td>Debit</td>
+                                    <td>Kredit</td>
+                                    <td></td>
+                                  </tr>
+                                  @foreach ($header2 as $key => $row)
+                                    <tr>
+                                        <td></td>
+                                        <td>{{$row->account_code}} - {{$row->name}}</td>
+                                        <td>
+                                          @if ($row->typeId == 1)
+                                            Detail
+                                          @else
+                                            Header
+                                          @endif
+                                        </td>
+                                        <td>{{$row->normal}}</td>
+                                        <td>Rp. {{number_format($row->debit)}}</td>
+                                        <td>Rp. {{number_format($row->credit)}}</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="button group">
+                                                <a href="{{route('account.edit',['account' => $row->id])}}"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button></a>
+                                                <form action="{{route('account.destroy',['account' => $row->id])}}" method="post">
+                                                  {{ csrf_field() }}
+                                                  <input type="hidden" name="_method" value="DELETE">
+                                                  <button type="submit" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                  @endforeach
+                                  <tr>
+                                    <td colspan="2">2-100 Utang Lancar</td>
+                                    <td>Header</td>
+                                    <td>Normal</td>
+                                    <td>Debit</td>
+                                    <td>Kredit</td>
+                                    <td></td>
+                                  </tr>
+                                  @foreach ($header3 as $key => $row)
+                                    <tr>
+                                        <td></td>
+                                        <td>{{$row->account_code}} - {{$row->name}}</td>
                                         <td>
                                           @if ($row->typeId == 1)
                                             Detail
