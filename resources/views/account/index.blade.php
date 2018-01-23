@@ -30,7 +30,7 @@
         <div class="page-header">
             <h1><i class="fa fa-list"></i> Rekening Akuntansi</h1>
         </div>
-        <a href="{{route('createAccount')}}" class="btn btn-info"><span class="fa fa-plus-circle"></span> Tambah Rekening Akuntansi</a>
+        <a href="{{route('account.create')}}" class="btn btn-info"><span class="fa fa-plus-circle"></span> Tambah Rekening Akuntansi</a>
         </center>
         <div class="content-wrap">  <!--START: Content Wrap-->
 
@@ -58,33 +58,33 @@
                                     <th>Action</th>
                                 </tr>
                                 </thead>
-                                <tfoot>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Rekening Akuntansi</th>
-                                    <th>Type</th>
-                                    <th>Normal</th>
-                                    <th>Debet</th>
-                                    <th>Kredit</th>
-                                    <th>Action</th>
-                                </tr>
-                                </tfoot>
                                 <tbody>
-                                <tr>
-                                    <td>{{$no=1}}</td>
-                                    <td>System Architect</td>
-                                    <td>Header</td>
-                                    <td>Debet</td>
-                                    <td>610000</td>
-                                    <td>0</td>
-                                    <td>
-                                        <div class="btn-group" role="group" aria-label="button group">
-                                            <button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button>
-                                            <button type="button" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
-                                        </div>
-                                    </td>
-                                </tr>
-
+                                  @foreach ($data as $key => $row)
+                                    <tr>
+                                        <td>{{++$key}}</td>
+                                        <td>{{$row->name}}</td>
+                                        <td>
+                                          @if ($row->typeId == 1)
+                                            Detail
+                                          @else
+                                            Header
+                                          @endif
+                                        </td>
+                                        <td>{{$row->normal}}</td>
+                                        <td>Rp. {{number_format($row->debit)}}</td>
+                                        <td>Rp. {{number_format($row->credit)}}</td>
+                                        <td>
+                                            <div class="btn-group" role="group" aria-label="button group">
+                                                <a href="{{route('account.edit',['account' => $row->id])}}"><button type="button" class="btn btn-primary"><i class="fa fa-pencil"></i> Edit</button></a>
+                                                <form action="{{route('account.destroy',['account' => $row->id])}}" method="post">
+                                                  {{ csrf_field() }}
+                                                  <input type="hidden" name="_method" value="DELETE">
+                                                  <button type="submit" class="btn btn-danger">Delete <i class="fa fa-trash"></i></button>
+                                                </form>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                  @endforeach
                                 </tbody>
                             </table>
                         </div>

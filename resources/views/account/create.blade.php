@@ -47,9 +47,9 @@
                         </div>
 
                         <div class="panel-body">
-                            <form action="#" role="form" id="formvalidationtooltip">
+                            <form action="{{route('account.store')}}" method="post" role="form" id="formvalidationtooltip">
+                              {{ csrf_field() }}
                                 <div class="form-body">
-
                                     <div class="form-group">
                                         <label>Kode Rekening</label>
                                         <input type="text"
@@ -60,13 +60,11 @@
 
                                     <div class="form-group">
                                         <label>Rekening Group</label>
-                                        <select name="account_group_id" class="form-control" required>
-                                            <option value="">--Pilih Satu--</option>
-                                            <option value="1">Harta</option>
-                                            <option value="2">Kewajiban</option>
-                                            <option value="3">Modal</option>
-                                            <option value="4">Pendapatan</option>
-                                            <option value="5">Biaya</option>
+                                        <select name="groupId" class="form-control" required>
+                                            <option value="" disabled>--Pilih Satu--</option>
+                                            @foreach ($accountGroups as $row)
+                                              <option value="{{$row->id}}">{{$row->name}}</option>
+                                            @endforeach
                                         </select>
                                     </div>
 
@@ -80,20 +78,29 @@
 
                                     <div class="form-group">
                                         <label>Kode Header</label>
-                                        <select name="header_id" class="form-control" required>
-                                            <option value="">--Pilih Satu--</option>
+                                        <select name="headerId" class="form-control" required>
+                                            <option value="" disabled>--Pilih Satu--</option>
                                             <option value="1">1-100 | Aktiva Lancar</option>
                                             <option value="2">1-200 | Aktiva Tetap</option>
-                                            <option value="2">2-100 | Utang Lancar</option>
+                                            <option value="3">2-100 | Utang Lancar</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Type</label>
+                                        <select name="typeId" class="form-control" required>
+                                            <option value="" disabled>--Pilih Satu--</option>
+                                            <option value="1">Detail</option>
+                                            <option value="2">Header</option>
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Normal</label>
-                                        <select name="normal_id" class="form-control" required>
-                                            <option value="">--Pilih Satu--</option>
-                                            <option value="1">Debet</option>
-                                            <option value="2">Kredit</option>
+                                        <select name="normal" class="form-control" required>
+                                            <option value="" disabled>--Pilih Satu--</option>
+                                            <option value="Debit">Debet</option>
+                                            <option value="Credit">Kredit</option>
                                         </select>
                                     </div>
 
@@ -107,16 +114,14 @@
                                         <label>Debet</label>
                                         <input type="number"
                                                class="form-control"
-                                               name="debet_open" placeholder="Saldo Pembukaan Debet"
-                                               required/>
+                                               name="debit" placeholder="Saldo Pembukaan Debet" required/>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Kredit</label>
                                         <input type="number"
                                                class="form-control"
-                                               name="kredit_open" placeholder="Saldo Pembukaan Kredit"
-                                               required/>
+                                               name="credit" placeholder="Saldo Pembukaan Kredit" required/>
                                     </div>
 
                                 </div>

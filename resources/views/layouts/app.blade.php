@@ -100,7 +100,7 @@
                     <div class="clearfix">&nbsp;</div>
 
                     <div class="col-md-4">
-                        <a href="{{route('indexAccount')}}" class="btn btn-linkedin btn-lg" id="btnX">
+                        <a href="{{route('account.index')}}" class="btn btn-linkedin btn-lg" id="btnX">
                             <i class="fa fa-user"></i>
                             <br>
                             Rekening Akuntansi

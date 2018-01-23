@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 Route::resource('/customer','CustomerController');
 Route::resource('/account_group','AccountGroupController');
+Route::resource('/account','AccountController');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/indexCustomer', 'CustomerController@index')->name('indexCustomer');
 Route::get('/createCustomer', 'CustomerController@create')->name('createCustomer');

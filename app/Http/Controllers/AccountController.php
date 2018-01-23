@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\AccountGroup;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -14,7 +15,9 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('account.index');
+        return view('account.index',[
+          'data' => Account::all()
+        ]);
     }
 
     /**
@@ -24,7 +27,9 @@ class AccountController extends Controller
      */
     public function create()
     {
-        return view('account.create');
+        return view('account.create',[
+          'accountGroups' => AccountGroup::all()
+        ]);
     }
 
     /**
@@ -35,7 +40,8 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Account::create($request->all());
+        return redirect(route('account.index'));
     }
 
     /**
@@ -57,7 +63,10 @@ class AccountController extends Controller
      */
     public function edit(Account $account)
     {
-        //
+        return view('account.edit',[
+          'accountGroups' => AccountGroup::all(),
+          'data' => $account
+        ]);
     }
 
     /**
@@ -69,7 +78,8 @@ class AccountController extends Controller
      */
     public function update(Request $request, Account $account)
     {
-        //
+        $account->update($request->all());
+        return redirect(route('account.index'));
     }
 
     /**
@@ -80,6 +90,7 @@ class AccountController extends Controller
      */
     public function destroy(Account $account)
     {
-        //
+        $account->delete();
+        return redirect(route('account.index'));
     }
 }

@@ -17,7 +17,7 @@
                 <a href="#"><i class="sli-book-open"></i> <span class="nav-text">Laporan</span></a>
             </li>
             <li>
-                <a href="{{route('indexAccountGroup')}}"><i class="sli-list"></i> <span class="nav-text">Rekening Group</span></a>
+                <a href="{{route('account_group.index')}}"><i class="sli-list"></i> <span class="nav-text">Rekening Group</span></a>
             </li>
             <li>
                 <a href="#"><i class="sli-calculator"></i> <span class="nav-text">Jurnal</span></a>
@@ -26,7 +26,7 @@
                 <a href="#"><i class="sli-hourglass"></i> <span class="nav-text">Neraca</span></a>
             </li>
             <li>
-                <a href="{{route('indexAccount')}}"><i class="sli-user"></i> <span class="nav-text">Rekening Akuntansi</span></a>
+                <a href="{{route('account.index')}}"><i class="sli-user"></i> <span class="nav-text">Rekening Akuntansi</span></a>
             </li>
             <li>
                 <a href="#"><i class="sli-logout"></i> <span class="nav-text">Logout</span></a>

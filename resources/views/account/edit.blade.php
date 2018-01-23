@@ -29,7 +29,7 @@
     <div class="main-container">    <!-- START: Main Container -->
         <center>
             <div class="page-header">
-                <h1><i class="fa fa-pencil"></i> Form Edit Rekening Akuntansi</h1>
+                <h1><i class="fa fa-pencil"></i> Form Ubah Rekening Akuntansi</h1>
             </div>
         </center>
         <div class="content-wrap">  <!--START: Content Wrap-->
@@ -47,23 +47,31 @@
                         </div>
 
                         <div class="panel-body">
-                            <form action="#" role="form" id="formvalidationtooltip">
+                            <form action="{{route('account.update',['account' => $data->id])}}" method="post" role="form" id="formvalidationtooltip">
+                              {{ csrf_field() }}
+                              <input type="hidden" name="_method" value="PUT">
                                 <div class="form-body">
-
                                     <div class="form-group">
                                         <label>Kode Rekening</label>
                                         <input type="text"
                                                class="form-control"
                                                name="account_code" placeholder="Nama Rekening Group"
+                                               value="{{$data->account_code}}"
                                                required/>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Rekening Group</label>
-                                        <input type="text"
-                                               class="form-control"
-                                               name="id_account_group" placeholder="Nama Rekening Group"
-                                               required/>
+                                        <select name="groupId" class="form-control" required>
+                                            <option value="" disabled>--Pilih Satu--</option>
+                                            @foreach ($accountGroups as $row)
+                                              @if ($row->id == $data->groupId)
+                                                <option value="{{$row->id}}" selected>{{$row->name}}</option>
+                                              @else
+                                                <option value="{{$row->id}}">{{$row->name}}</option>
+                                              @endif
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
@@ -71,25 +79,55 @@
                                         <input type="text"
                                                class="form-control"
                                                name="name" placeholder="Nama Rekening Group"
+                                               value="{{$data->name}}"
                                                required/>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Kode Header</label>
-                                        <select name="header_id" class="form-control" required>
-                                            <option value="">--Pilih Satu--</option>
-                                            <option value="1">1-100 | Aktiva Lancar</option>
-                                            <option value="2">1-200 | Aktiva Tetap</option>
-                                            <option value="2">2-100 | Utang Lancar</option>
+                                        <select name="headerId" class="form-control" required>
+                                            <option value="" disabled>--Pilih Satu--</option>
+                                            @if ($data->headerId == 1)
+                                              <option value="1" selected>1-100 | Aktiva Lancar</option>
+                                              <option value="2">1-200 | Aktiva Tetap</option>
+                                              <option value="3">2-100 | Utang Lancar</option>
+                                            @elseif ($data->headerIt == 2)
+                                              <option value="1">1-100 | Aktiva Lancar</option>
+                                              <option value="2" selected>1-200 | Aktiva Tetap</option>
+                                              <option value="3">2-100 | Utang Lancar</option>
+                                            @else
+                                              <option value="1">1-100 | Aktiva Lancar</option>
+                                              <option value="2">1-200 | Aktiva Tetap</option>
+                                              <option value="3" selected>2-100 | Utang Lancar</option>
+                                            @endif
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Type</label>
+                                        <select name="typeId" class="form-control" required>
+                                            <option value="" disabled>--Pilih Satu--</option>
+                                            @if ($data->typeId == 1)
+                                              <option value="1" selected>Detail</option>
+                                              <option value="2">Header</option>
+                                            @else
+                                              <option value="1">Detail</option>
+                                              <option value="2" selected>Header</option>
+                                            @endif
                                         </select>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Normal</label>
-                                        <select name="normal_id" class="form-control" required>
-                                            <option value="">--Pilih Satu--</option>
-                                            <option value="1">Debet</option>
-                                            <option value="2">Kredit</option>
+                                        <select name="normal" class="form-control" required>
+                                            <option value="" disabled>--Pilih Satu--</option>
+                                            @if ($data->normal == 'Debit')
+                                              <option value="Debit" selected>Debet</option>
+                                              <option value="Credit">Kredit</option>
+                                            @else
+                                                <option value="Debit">Debet</option>
+                                                <option value="Credit" selected>Kredit</option>
+                                            @endif
                                         </select>
                                     </div>
 
@@ -103,23 +141,25 @@
                                         <label>Debet</label>
                                         <input type="number"
                                                class="form-control"
-                                               name="debet_open" placeholder="Saldo Pembukaan Debet"
-                                               required/>
+                                               name="debit" placeholder="Saldo Pembukaan Debet"
+                                               value="{{$data->debit}}"
+                                                required/>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Kredit</label>
                                         <input type="number"
                                                class="form-control"
-                                               name="kredit_open" placeholder="Saldo Pembukaan Kredit"
-                                               required/>
+                                               name="credit" placeholder="Saldo Pembukaan Kredit"
+                                               value="{{$data->credit}}"
+                                              required/>
                                     </div>
 
                                 </div>
 
                                 <div class="form-actions fluid">
                                     <div class="col-md-12 text-right">
-                                        <button type="submit" class="btn btn-info">Submit</button>
+                                        <button type="submit" class="btn btn-warning">Ubah</button>
                                     </div>
                                 </div>
                             </form>
